@@ -1,0 +1,46 @@
+extends base
+
+mixin homeDescriptionBlocks(text, imgPath, imgAlt) 
+    .home-wrapper.ma-bt-lg
+            .home-textblock.border-blue.ma-bt-md.ma-tp-md(data-aos="zoom-in") #{text}
+            .home-photo(data-aos="zoom-in")
+                img(src=`${imgPath}` alt=`${imgAlt}` loading="lazy")
+
+mixin howDoesItWork()
+    .home-wrapper.ma-bt-lg
+    .home-textblock.border-blue.ma-bt-md.ma-tp-md(data-aos="fade-down")
+        ol 
+            li Sign up and make an account.
+            li Log in.
+            li Go to "My account page".
+            li Go to "Subscription".
+            li Choose a subscription plan.
+            li Pay the transaction.
+            li After successful payment process, go to "My applications".
+            li Connect your app which you'd like to save.
+            li It's done! Now your data is safe with us.
+
+block content 
+    .container
+        .heading-primary.ma-tp-md
+            span What is it about? 
+        +homeDescriptionBlocks("This website allows users to create an account where they can store various types of data, such as documents, passwords, contacts or bank account information. When a user dies, this data is automatically transferred to the people the user has designated as his or her heirs. Thanks to this site, relatives of a deceased person can more easily deal with the formalities and arrange matters after his death.", "/img/family.jpg", "Family")
+        +homeDescriptionBlocks("This site is very useful for people who want to secure their data and make life easier for their loved ones after their passing. It is also possible to specify what specific data is to be transferred and how  (e.g. upon receipt of the relevant document confirming the user's death)", "/img/papers.jpg", "Papers")
+        +homeDescriptionBlocks("This website is particularly useful for people  who want to secure their data and make life easier for their loved ones after their passing. It allows heirs to quickly and easily access the information and documents they need, avoiding additional stress and difficulty at the time of bereavement. The site is also very useful for people who themselves want to be in control of their data and decide what should happen to it after their death.", "/img/arrangement.jpg", "Arrangement")
+        +homeDescriptionBlocks("In addition to this, the site also offers a number of other useful tools and services, such as the ability to create a list of things to do after death, funeral planning and assistance in drawing up a will. As a result, users can rest assured that their affairs will be handled as they wish.", "/img/trust.jpg", "Trust")
+        .heading-primary.ma-tp-md
+            span How does it work?
+        +howDoesItWork()
+        .heading-primary.ma-tp-md
+            span They trusted us:
+        .home-wrapper.ma-bt-lg.ma-tp-md.flex.home-trusted-users
+            if trustedUsers 
+                each user in trustedUsers 
+                    .home-trusted-user(data-aos=user.aos)
+                        img(src=`${user.img}` alt=`${user.name}`)
+                        p #{user.name}
+        .heading-primary.ma-tp-md
+            span Join us
+        .flex.center.ma-bt-lg.ma-tp-md
+            a(href="/login")
+                button.btn.btn--blue Login now!

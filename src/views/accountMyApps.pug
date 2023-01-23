@@ -1,0 +1,29 @@
+extends _account 
+
+block accountView 
+    if subscription === "NONE"
+        h2.heading-secondary(style="text-align: center;") You haven't subscribed yet! Go to subscription panel to do so.
+    else 
+        .user-view__form-container.my-apps
+            .headings
+                p.current-info.ma-bt-md Your current subscription plan is: 
+                    span #{subscription}
+                p.current-info You've connected #{connectedAccounts.length} #{connectedAccounts.length === 1 ? "account" : "accounts"} so far.
+                p.current-info.ma-bt-md.ma-bt-lg #{numOfAccountsPossibleToConnect - connectedAccounts.length} connections left!
+            if connectedAccounts.length > 0
+                .line
+                .accounts-area-container.flex
+                    each account in connectedAccounts 
+                        .account-area.border-blue.flex.ma-bt-lg(data-id=account._id)
+                            h1.ma-bt-md #{account.accountType} 
+                            p.current-info.self-left Allowed user: 
+                                span.allowed-credentials #{account.allowedPersonName}
+                            p.current-info.self-left.ma-bt-md Allowed user phone number: 
+                                span.allowed-credentials #{account.allowedPersonPhoneNumber}
+                            - const date = new Date(account.addedAt).toString().split("GMT")[0]
+                            h2 Added at #{date}
+                            button.btn.btn--red.border-black.ma-tp-md.delete-acc-btn Delete connected account
+                .line
+            button.btn.btn--blue.add-new-account Add new account!
+
+            // usuniecie konta i zmiana loginu i hasla

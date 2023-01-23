@@ -1,0 +1,27 @@
+extends base
+
+block content
+  main.main
+    .auth-form
+      h2.heading-secondary.ma-bt-lg #{signingUp ? "Sign up" : "Log in to your account"}
+      form.form(class= signingUp ? "signup-form" : 'login-form')
+        if signingUp
+          .form__group
+            label.form__label(for='username') Name
+            input#username.form__input(type='text', placeholder='John Doe', required)
+        .form__group
+          label.form__label(for='email') Email address
+          input#email.form__input(type='email', placeholder='you@example.com', required)
+        .form__group.ma-bt-md
+          label.form__label(for='password') Password
+          input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
+        if signingUp
+          .form__group.ma-bt-md
+            label.form__label(for='confirmPassword') Confirm Password
+            input#confirmPassword.form__input(type='password', placeholder='••••••••', required, minlength='8')
+        if !signingUp
+          .form__group
+            a.forgot-password-a(href="/forgot-password") Don't remember password? Click here. 
+        .form__group
+          button.btn.btn--blue #{signingUp ? "Sign up" : "Login"}
+        

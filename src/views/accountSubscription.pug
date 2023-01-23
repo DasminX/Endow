@@ -1,0 +1,18 @@
+extends _account
+
+block accountView 
+    .user-view__form-container
+        h2.heading-secondary.ma-bt-md Your subscription
+        p.current-info.ma-bt-md Your current subscription plan is: 
+            span #{user.subscription}
+        .subscription-plans-container.flex
+            each subscriptionPlan in subscriptionPlans
+                .sub-area.border-blue.flex.ma-bt-lg(data-type=`${subscriptionPlan.type}`)
+                    h1.ma-bt-md #{subscriptionPlan.type} 
+                    ul.ma-bt-md
+                        each feature in subscriptionPlan.features
+                            li * #{feature}
+                    if userSubscription === subscriptionPlan.type 
+                        button.btn.btn--white.border-black Cancel your current subscription
+                    else
+                        button.btn.btn--blue Get plan now for only $#{subscriptionPlan.price} per month!
